@@ -220,12 +220,12 @@ public class PoiExcelController {
             // 등록일
             cell = row.createCell(cellCnt++);
             cell.setCellStyle(bodyStyle);
-            cell.setCellValue(board.getCreateDate());
+            cell.setCellValue((board.getCreateDate()).toString());
 
             // 수정일
             cell = row.createCell(cellCnt++);
             cell.setCellStyle(bodyStyle);
-            cell.setCellValue(board.getUpdateDate());
+            cell.setCellValue((board.getCreateDate()).toString());
         }
 
         response.setContentType("application/vnd.ms-excel");
