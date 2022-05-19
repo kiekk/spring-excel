@@ -52,4 +52,14 @@ public class PoiExcelController {
                         .viewCount(9).likeIt(10).createDate(LocalDateTime.now()).updateDate(LocalDateTime.now()).build().entityToMap());
     }
 
+    @RequestMapping("excel-download")
+    public void poiExcelDownload(HttpServletResponse response) throws IOException {
+
+        new ExcelUtil().createExcelToResponse(
+                boardList,
+                String.format("%s-%s", "data", LocalDate.now().toString()),
+                response
+        );
+    }
+
 }
