@@ -66,4 +66,12 @@ public class PoiExcelController {
         );
     }
 
+    @RequestMapping("excel-create-file")
+    public String poiExcelCreateFile() throws IOException {
+        String filepath = "C:/Users/soonho/Desktop/data.xlsx";
+        new ExcelUtil().createExcelToFile(headerList, boardList, filepath);
+
+        return "redirect:/";
+    }
+
 }

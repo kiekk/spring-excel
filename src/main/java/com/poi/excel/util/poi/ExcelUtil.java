@@ -17,13 +17,14 @@ public class ExcelUtil {
 
     private int rowNum = 0;
 
-    public void createExcelToFile(List<Map<String, Object>> dataList, String filepath) throws FileNotFoundException, IOException {
+    public void createExcelToFile(List<Map<String, Object>> headerList, List<Map<String, Object>> dataList, String filepath) throws FileNotFoundException, IOException {
 
         Workbook workbook = new SXSSFWorkbook();
         Sheet sheet = workbook.createSheet("엑셀_다운로드_POI");
 
         rowNum = 0;
 
+        createExcel(sheet, headerList);
         createExcel(sheet, dataList);
 
         FileOutputStream fos = new FileOutputStream(filepath);
