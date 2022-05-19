@@ -17,6 +17,7 @@ import java.util.Map;
 @RequestMapping("/poi")
 public class PoiExcelController {
 
+    private final static List<Map<String, Object>> headerList = new ArrayList<>();
     private final static List<Map<String, Object>> boardList = new ArrayList<>();
 
     static {
@@ -50,12 +51,15 @@ public class PoiExcelController {
         boardList.add(
                 Board.builder().id(10).title("게시글10").content("게시글내용10").writer("작성자10")
                         .viewCount(9).likeIt(10).createDate(LocalDateTime.now()).updateDate(LocalDateTime.now()).build().entityToMap());
+
+        headerList.add(new Board().getHeaderToMap());
     }
 
     @RequestMapping("excel-download")
     public void poiExcelDownload(HttpServletResponse response) throws IOException {
 
         new ExcelUtil().createExcelToResponse(
+                headerList,
                 boardList,
                 String.format("%s-%s", "data", LocalDate.now().toString()),
                 response

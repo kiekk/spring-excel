@@ -32,13 +32,14 @@ public class ExcelUtil {
 
     }
 
-    public void createExcelToResponse(List<Map<String, Object>> dataList, String filename, HttpServletResponse response) throws IOException {
+    public void createExcelToResponse(List<Map<String, Object>> headerList, List<Map<String, Object>> dataList, String filename, HttpServletResponse response) throws IOException {
 
         Workbook workbook = new SXSSFWorkbook();
         Sheet sheet = workbook.createSheet("엑셀_다운로드_POI");
 
         rowNum = 0;
 
+        createExcel(sheet, headerList);
         createExcel(sheet, dataList);
 
         response.setContentType("application/vnd.ms-excel");
