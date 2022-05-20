@@ -1,9 +1,15 @@
 package com.poi.excel.entity;
 
+import com.poi.excel.util.annotation.ExcelColumnName;
+import com.poi.excel.util.annotation.ExcelDto;
+import com.poi.excel.util.annotation.ExcelFileName;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -12,15 +18,24 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Board {
+@ExcelFileName(filename = "게시판목록")
+public class Board implements ExcelDto {
 
+    @ExcelColumnName(headerName = "아이디")
     private int id;
+    @ExcelColumnName(headerName = "제목")
     private String title;
+    @ExcelColumnName(headerName = "내용")
     private String content;
+    @ExcelColumnName(headerName = "작성자")
     private String writer;
+    @ExcelColumnName(headerName = "조회수")
     private int viewCount;
+    @ExcelColumnName(headerName = "좋아요수")
     private int likeIt;
+    @ExcelColumnName(headerName = "등록일")
     private LocalDateTime createDate;
+    @ExcelColumnName(headerName = "수정일")
     private LocalDateTime updateDate;
 
     public Map<String, Object> entityToMap() {
@@ -49,4 +64,17 @@ public class Board {
         return result;
     }
 
+    @Override
+    public List<Serializable> mapToList() {
+        return Arrays.asList(
+                String.valueOf(id),
+                title,
+                content,
+                writer,
+                String.valueOf(viewCount),
+                String.valueOf(likeIt),
+                createDate.toString(),
+                updateDate.toString()
+        );
+    }
 }
