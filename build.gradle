@@ -20,6 +20,8 @@ repositories {
 
 ext {
     poiVersion = "5.0.0"
+    jxlsVersion = "2.6.0"
+    jxlsPoiVersion = "1.2.0"
 }
 
 dependencies {
@@ -30,7 +32,8 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation "org.apache.poi:poi-ooxml:${poiVersion}"
+    implementation "org.jxls:jxls:${jxlsVersion}"
+    implementation "org.jxls:jxls-poi:${jxlsPoiVersion}"
 }
 
 tasks.named('test') {
