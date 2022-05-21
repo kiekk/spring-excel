@@ -19,11 +19,11 @@ public class JxlsExcelDownload extends AbstractXlsxView {
 
     @Override
     protected void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String filename = (String) model.get("template");
-        ClassPathResource classPathResource = new ClassPathResource("static/excel/templates/board.xlsx");
+        String templateName = (String) model.get("template");
+        ClassPathResource classPathResource = new ClassPathResource(String.format("static/excel/templates/%s.xlsx", templateName));
 
         try (InputStream inputStream = new BufferedInputStream(classPathResource.getInputStream())) {
-            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment;filename=%s.xlsx", filename));
+            response.setHeader(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment;filename=%s.xlsx", templateName));
             OutputStream outputStream = response.getOutputStream();
 
             Context context = new Context();
