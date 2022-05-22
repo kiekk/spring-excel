@@ -10,13 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +47,8 @@ public class PoiExcelController {
     }
 
     @PostMapping("excel-upload")
-    public void poiExcelUpload(MultipartFile excelFile) {
+    @ResponseBody
+    public List<Board> poiExcelUpload(MultipartFile excelFile) {
         List<Board> boardList = new ArrayList<>();
         try {
             OPCPackage opcPackage = OPCPackage.open(excelFile.getInputStream());
@@ -68,12 +69,7 @@ public class PoiExcelController {
                 // 행의 1번째 열
                 XSSFCell cell = row.getCell(rowNum++);
                 if (null != cell) {
-                    board.setId(Integer.parseInt(cell.getStringCellValue()));
-                }
-
-                cell = row.getCell(rowNum++);
-                if (null != cell) {
-                    board.setTitle(cell.getStringCellValue());
+                    board.setId((int) cell.getNumericCellValue());
                 }
 
                 cell = row.getCell(rowNum++);
@@ -93,22 +89,22 @@ public class PoiExcelController {
 
                 cell = row.getCell(rowNum++);
                 if (null != cell) {
-                    board.setViewCount(Integer.parseInt(cell.getStringCellValue()));
+                    board.setViewCount((int) cell.getNumericCellValue());
                 }
 
                 cell = row.getCell(rowNum++);
                 if (null != cell) {
-                    board.setLikeIt(Integer.parseInt(cell.getStringCellValue()));
+                    board.setLikeIt((int) cell.getNumericCellValue());
                 }
 
                 cell = row.getCell(rowNum++);
                 if (null != cell) {
-                    board.setCreateDate(cell.getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                    board.setCreateDate(LocalDateTime.parse(cell.getStringCellValue()));
                 }
 
                 cell = row.getCell(rowNum++);
                 if (null != cell) {
-                    board.setUpdateDate(cell.getDateCellValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+                    board.setUpdateDate(LocalDateTime.parse(cell.getStringCellValue()));
                 }
 
                 boardList.add(board);
@@ -123,6 +119,8 @@ public class PoiExcelController {
         System.out.println("################################################");
         System.out.println("################################################");
         boardList.forEach(System.out::println);
+
+        return boardList;
     }
 
     @RequestMapping("excel-download-1")

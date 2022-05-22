@@ -36,7 +36,7 @@
         const formData = new FormData();
         formData.append("excelFile", excelFile.files[0]);
 
-        fetch("/poi/excel/upload", {
+        fetch("/poi/excel-upload", {
             method : "POST",
             body : formData
         })
