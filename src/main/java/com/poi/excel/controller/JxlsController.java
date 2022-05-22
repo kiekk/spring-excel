@@ -5,6 +5,7 @@ import com.poi.excel.entity.User;
 import com.poi.excel.util.jxls.JxlsExcelDownload;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -45,4 +46,10 @@ public class JxlsController {
 
         return new ModelAndView(new JxlsExcelDownload());
     }
+
+    @GetMapping("excel-upload")
+    public String jxlsExcelUpload() {
+        return "jxls-excel-upload";
+    }
+
 }
