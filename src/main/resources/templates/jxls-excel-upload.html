@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <div>
+        <h2>excel upload</h2>
+        <input type="file" id="excel-file">
+        <button id="excel-upload">excel upload</button>
+    </div>
+</div>
+<script type="text/javascript">
+    document.getElementById("excel-upload").addEventListener("click", excelUpload);
+
+    function excelUpload() {
+        const excelFile = document.getElementById("excel-file");
+
+        if (!excelFile.value) {
+            alert("엑셀파일을 첨부해주세요.");
+            return;
+        }
+        const extension = excelFile.files[0].name.split(".").pop().toLowerCase();
+
+        if (extension !== "xlsx" && extension !== "xls") {
+            alert("엑셀파일을 첨부해주세요.");
+            excelFile.value = null;
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("excelFile", excelFile.files[0]);
+
+        fetch("/jxls/excel-upload", {
+            method : "POST",
+            body : formData
+        })
+            .then(response => console.log(response));
+    }
+</script>
+</body>
+</html>
