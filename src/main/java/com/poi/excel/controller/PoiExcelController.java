@@ -35,6 +35,11 @@ public class PoiExcelController {
         headerList1.add(new Board().getHeaderToMap());
     }
 
+    @RequestMapping("excel-upload")
+    public String poiExcelUpload() {
+        return "poi-excel-upload";
+    }
+
     @RequestMapping("excel-download-1")
     public void poiExcelDownload1(HttpServletResponse response) throws IOException {
 
