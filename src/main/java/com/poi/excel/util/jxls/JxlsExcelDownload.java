@@ -6,6 +6,7 @@ import org.jxls.util.JxlsHelper;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
+import tech.simter.jxls.ext.CommonFunctions;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,7 @@ public class JxlsExcelDownload extends AbstractXlsxView {
             OutputStream outputStream = response.getOutputStream();
 
             Context context = new Context();
+            context.putVar("fn", CommonFunctions.getSingleton());
             context.putVar("list", model.get("list"));
             JxlsHelper.getInstance().processTemplate(inputStream, outputStream, context);
             outputStream.close();

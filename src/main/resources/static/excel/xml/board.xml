@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<workbook>
+    <worksheet idx="0">
+        <section startRow="0" endRow="0"/>
+        <loop startRow="1" endRow="1" items="boardList" var="item" varType="com.poi.excel.entity.Board">
+            <section startRow="1" endRow="1">
+                <mapping row="1" col="0">item.id</mapping>
+                <mapping row="1" col="1">item.title</mapping>
+                <mapping row="1" col="2">item.content</mapping>
+                <mapping row="1" col="3">item.writer</mapping>
+                <mapping row="1" col="4">item.viewCount</mapping>
+                <mapping row="1" col="5">item.likeIt</mapping>
+                <mapping row="1" col="6">item.createDate</mapping>
+                <mapping row="1" col="7">item.updateDate</mapping>
+            </section>
+            <loopbreakcondition>
+                <rowcheck offset="0"/>
+            </loopbreakcondition>
+        </loop>
+    </worksheet>
+</workbook>
