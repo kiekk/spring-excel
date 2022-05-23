@@ -23,6 +23,7 @@ ext {
     jxlsVersion = "2.6.0"
     jxlsPoiVersion = "1.2.0"
     jxlsReaderVersion = "2.0.6"
+    jxlsSimterVersion = "1.0.0"
 }
 
 dependencies {
@@ -36,6 +37,7 @@ dependencies {
     implementation "org.jxls:jxls:${jxlsVersion}"
     implementation "org.jxls:jxls-poi:${jxlsPoiVersion}"
     implementation "org.jxls:jxls-reader:${jxlsReaderVersion}"
+    implementation "tech.simter:simter-jxls-ext:${jxlsSimterVersion}"
 }
 
 tasks.named('test') {
